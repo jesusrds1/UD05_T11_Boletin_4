@@ -7,14 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-   for ($i = 5; $i <= 100; $i += 5) {
-    echo "<p>multiplos: $i </p>";
-    }
-   
-
-
     
+    <?php
+
     ?>
 </body>
 </html>

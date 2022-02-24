@@ -8,13 +8,11 @@
 </head>
 <body>
 <?php
-   for ($i = 5; $i <= 100; $i += 5) {
-    echo "<p>multiplos: $i </p>";
-    }
-   
-
-
-    
-    ?>
+          $i = 320;
+          do {
+            echo "$i  ";
+            $i -= 20;
+          } while($i > 159);
+        ?>
 </body>
 </html>
