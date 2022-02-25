@@ -15,8 +15,18 @@
 
 </form>
     <?php
-
-
+        $num = $_POST['num'];
+        $fib0 = 0;
+        $fib1 = 1;
+        echo "$fib0 <br>";
+        echo "$fib1 <br>";
+    for ($i=2; $i < $num  ; $i++) { 
+        $fibActual = $fib0 + $fib1;
+        echo "$fibActual <br>";
+        $fib0 = $fib1;
+        $fib1 = $fibActual;
+    }
+    echo "Fibonachi de $num = $fibActual <br>";
     ?>
 </body>
 </html>
