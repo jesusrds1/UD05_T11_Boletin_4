@@ -20,8 +20,7 @@
             <select name="figura">
               <?php
                 $figura = array (
-                  "bolita" => "Bolita", "ladrillo" => "Ladrillo", "pinguino" => "Pingüino",
-                  "pina" => "Piña", "sol" => "Sol",
+                  "bolita" => "Bolita", "ladrillo" => "Ladrillo", "pinguino" => "Pingüino", "sol" => "Sol",
                 );
                 
                 foreach ($figura as $clave => $valor) {
@@ -48,7 +47,7 @@
 
               // inserta espacios
               for ($i = 1; $i <= $espacios; $i++) {
-                echo "<img src=\"blanco.png\">";
+                echo "<img src=\"imagen_blanco.png\">";
               }
 
               // pinta la línea

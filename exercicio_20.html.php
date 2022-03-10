@@ -40,7 +40,7 @@
             <input type="submit" value="Aceptar">
           </form>
           <?php
-          } else { // pinta la pirámide //////////////////////////////
+          } else { // pinta la pirámide 
             $altura = 1;
             $i = 0;
             $espaciosPorDelante = $alturaIntroducida - 1;
