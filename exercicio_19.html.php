@@ -40,7 +40,7 @@
             <input type="submit" value="Aceptar">
           </form>
           <?php
-          } else { // pinta la pirámide //////////////////////////////
+          } else { // pinta la pirámide
             $altura = 1;
             $espacios = $alturaIntroducida - 1;
 
@@ -48,13 +48,13 @@
 
               // inserta espacios
               for ($i = 1; $i <= $espacios; $i++) {
-                echo "<img src=\"blanco.png\" width=\"36\">";
+                echo "<img src=\"blanco.png\">";
               }
 
               // pinta la línea
               for ($i = 1; $i < $altura * 2; $i++) {
                
-                echo "<img src=\"$figura.png\" width=\"36\">";
+                echo "<img src=\"$figura.png\">";
               }
 
               echo "<br>";
