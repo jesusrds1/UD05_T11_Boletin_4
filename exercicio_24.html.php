@@ -35,7 +35,7 @@
 
               $altura++;
               $espacios--;
-            } // while
+            }
             echo "</p>";
           }
         ?>

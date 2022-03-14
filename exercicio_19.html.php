@@ -4,64 +4,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Exercicio 19_piramide</title>
 </head>
 <body>
-<?php
-          $alturaIntroducida = $_POST['alturaIntroducida'];
-          $figura = $_POST['figura'];
-        
-          if (!isset($alturaIntroducida)){
-          ?>
-          <h2>Pirámide</h2>
-          <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-            Altura: <input type="number" name="alturaIntroducida" min="1" max="10" autofocus=""><br>
-            Figura base:
-            <select name="figura">
-              <?php
-                $figura = array (
-                  "bolita" => "Bolita", "ladrillo" => "Ladrillo", "pinguino" => "Pingüino", "sol" => "Sol",
-                );
-                
-                foreach ($figura as $clave => $valor) {
-                ?>
-                <option value="<?php echo $clave; ?>" 
-                      style="background-image: url(<?php echo $clave; ?>.png);
-                      background-repeat: no-repeat;
-                      background-size: 15px;
-                      background-position: 1px;
-                      padding-left:20px;
-                      "><?php echo $valor; ?></option>
-                <?php
-                }
-                ?>
-            </select>
-            <input type="submit" value="Aceptar">
-          </form>
-          <?php
-          } else { // pinta la pirámide
-            $altura = 1;
-            $espacios = $alturaIntroducida - 1;
 
-            while ($altura <= $alturaIntroducida) {
+    <?php 
+        $altura = $_POST['altura'];
+        $icono = $_POST['icono'];
 
-              // inserta espacios
-              for ($i = 1; $i <= $espacios; $i++) {
-                echo "<img src=\"imagen_blanco.png\">";
-              }
+        $errores = validarFormulario($altura, $icono);
+        if(count($errores)>0){
+            pintarFormulario();
+            for ($i=0; $i < count($errores); $i++) { 
+                echo "<p>* $errores[$i] </p>";
+            }
+        }else{
+            pintarFormulario();
+            pintarPiramide($altura, $icono);
+        }
 
-              // pinta la línea
-              for ($i = 1; $i < $altura * 2; $i++) {
-               
-                echo "<img src=\"$figura.png\">";
-              }
 
-              echo "<br>";
-              
-              $altura++;
-              $espacios--;
-            }          
-          }
-          ?>
+        function validarFormulario($a,$i){
+
+            $errores = array();
+
+            if($a == ''){
+                array_push($errores, "Tes que indicar a altura");
+            }
+            
+            if( filter_var($a, FILTER_VALIDATE_INT)   && $a < 0){
+                array_push($errores, "A altura ten que ser un número positivo");
+            }
+
+            if($i == ''){
+                array_push($errores, "Tes que escoller unha imaxe");
+            }
+
+            return $errores;
+
+        }
+
+        function pintarFormulario(){
+
+            ?>
+
+            <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+                <label for="altura">Altura da pirámide:</label>
+                <input type="number" name="altura">
+                <select name="icono">
+                    <option value="asterisco.jpg">Asterisco</option>
+                    <option value="facebook.jpg">Facebook</option>
+                    <option value="instagram.jpg">Instagram</option>
+                    <option value="twitter.png">Twitter</option>
+                    <option value="WhatsApp.jpg">Whatsapp</option>
+                </select>
+                <input type="submit" value="Enviar">    
+            </form>
+            <?php
+
+        }
+
+
+        function pintarPiramide($a, $i){            
+            $linea="";
+            for($indice=0; $indice<$a; $indice++){
+                $linea=$linea."<img src='img/$i' height='24px'>";
+                echo $linea."<br>";
+            }
+        }
+    ?>
+    
 </body>
 </html>

@@ -18,6 +18,6 @@
             $numero = floor($numero / 10);
           }
 
-          echo "Si le damos la vuelta al $n tenemos el $volteado";
+          echo "Si le damos la vuelta al numero $n resulta : $volteado";
         }
         ?>
