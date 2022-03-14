@@ -1,61 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<?php
-        
-        $n = $_POST['n'];
-        $cuentaNumeros = $_POST['cuentaNumeros'];
-        $sumaImpares = $_POST['sumaImpares']; 
-        $cuentaImpares = $_POST['cuentaImpares'];
-        $mayorPar = $_POST['mayorPar'];
-        
-        // Se inicializan los valores en la primera carga de página
-        if (!isset($n)) {
-          $cuentaNumeros = 0;
-          $sumaImpares = 0; 
-          $cuentaImpares = 0;
-          $mayorPar = (PHP_INT_MIN);
-        }
-    
-        if ($n > 0) {
-          $cuentaNumeros++;
-          if ($n % 2 == 0) {
-            if ($n > $mayorPar) {
-              $mayorPar = $n;
-            } else {
-              $cuentaImpares++;
-              $sumaImpares += $n;
-            }
-          }
-        }
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Ejercicio 21</title>
+    </head>
+    <body>
+        <h3>Ejercicio 21</h3>
+        <p>Realiza un programa que vaya pidiendo números hasta que se introduzca un numero negativo y nos diga cuantos números se han introducido, la media de los impares y el mayor de los pares. El número negativo sólo se utiliza para indicar el final de la introducción de datos pero no se incluye en el cómputo.</p>
 
-        // Muestra el formulario en la primera carga de página y mientras se introduzcan números positivos
-        if ((!isset($n)) || ($n > 0)) {
-        ?>
-          Introduzca un número. Si quiere terminar, introduzca un número negativo.<br>
-          <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-            <input type="number" name="n" autofocus=""><br>
-            <input type="hidden" name="cuentaNumeros" value="<?php echo $cuentaNumeros; ?>">
-            <input type="hidden" name="sumaImpares" value="<?php echo $sumaImpares; ?>">
-            <input type="hidden" name="cuentaImpares" value="<?php echo $cuentaImpares; ?>">
-            <input type="hidden" name="mayorPar" value="<?php echo $mayorPar; ?>">
-            <input type="submit" value="Aceptar">
-          </form>
         <?php
-        }
-        
-        // Muestra el resultado
-        if ($n < 0) {
-          echo "Se han introducido $cuentaNumeros números <br>";
-          echo "La media de los impares es ".($sumaImpares / $cuentaImpares)."<br>";
-          echo "El mayor de los pares es $mayorPar<br>";
-        }
-      ?>
-</body>
+            if (isset($_REQUEST["reiniciar"])) {
+                $count=0;
+                $res=0;
+                $par=0;
+                $impares=0;
+                $max_par=0;
+            }
+
+            $res=$_REQUEST["res"];
+            $count=$_REQUEST["count"];
+            $par=$_REQUEST["par"];
+            $impares=$_REQUEST["impares"];
+            $max_par=$_REQUEST["max_par"];
+
+            if (isset($_REQUEST["num"]) && is_numeric($_REQUEST["num"]) && $_REQUEST["num"] >= 0) {
+                $count=intval(isset($_REQUEST["count"])?$_REQUEST["count"]+1:0);
+                if ($_REQUEST["num"] % 2 == 0) {
+                    $par = $_REQUEST["num"];
+                    if (($par % 2 == 0) && ($par > $max_par)) {
+                        $max_par = intval(isset($_REQUEST["max_par"])?$par:0);
+                    }
+                } else {
+                    $impares=intval(isset($_REQUEST["impares"])?$_REQUEST["impares"]+1:0);
+                    $res=intval(isset($_REQUEST["res"])?$_REQUEST["res"]+intval(isset($_REQUEST["num"])?$_REQUEST["num"]:0):0);
+                }
+            }
+
+            if (isset($_REQUEST["num"]) && $_REQUEST["num"] < 0) {
+        ?>
+            <form action="ejercicio_21.php" method="post">
+                <input type="submit" value="Reiniciar">
+            </form>
+
+        <?php
+                $media_im=$res/$impares;
+                echo "<p>Números introducidos: $count</p>";
+                echo "<p>A media dos impares é de $media_im</p>";
+                echo "<p>O mayor dos pares é $max_par</p>";
+            } else {
+        ?>
+                <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">
+                    <p><input type="text" name="num"></p>
+                    <p><input type="hidden" name="res" value="<?php echo $res?>"></p>
+                    <p><input type="hidden" name="count" value="<?php echo $count?>"></p>
+                    <p><input type="hidden" name="pares" value="<?php echo $pares?>"></p>
+                    <p><input type="hidden" name="impares" value="<?php echo $impares?>"></p>
+                    <p><input type="hidden" name="max_par" value="<?php echo $max_par?>"></p>
+                    <p><input type="submit" value="Enviar"></p>
+                </form>
+        <?php
+                echo "<p>Suma: $res</p>";
+                echo "<p>Números introducidos: $count</p>";
+                echo "<p>Tipo: ".gettype(intval($_REQUEST["num"]))." ".$_REQUEST["num"]."</p>";
+                echo "<p>Números pares: ".$pares."</p>";
+                echo "<p>Números impares: ".$impares."</p>";
+                echo "<p>Par máximo: ".$max_par."</p>";
+            }
+        ?>
+    </body>
 </html>

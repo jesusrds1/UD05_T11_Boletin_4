@@ -1,34 +1,25 @@
-<?php
-          $n = $_POST['n'];
-          $suma = $_POST['suma']; 
-          $numeroDeElementos = $_POST['numeroDeElementos'];
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Ejercicio 23</title>
+    </head>
+    <body>
+        <h3>Ejercicio 23</h3>
+        <p>Escribe un programa que permita ir introduciendo una serie indeterminada de números hasta que la suma de ellos supere el valor 10000. Cuando esto último ocurra, se debe mostrar el total acumulado, el contador de los números introducidos y la media.</p>
 
-          // Inicializa variables
-          if (!isset($n)) {
-            $suma = 0;
-            $numeroDeElementos = -1;
-          }
-
-          if ($suma < 10000) {
-            $suma += $n;
-            $numeroDeElementos++;
-          }
-        
-          if ((!isset($n)) || ($suma < 10000)) {
-          ?>
-            Introduzca numeros mientras la suma de ellos sea inferior a 10000<br>
-            <<form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST">>
-              <input type="number" name="n" autofocus=""><br>
-              <input type="text" name="numeroDeElementos" value="<?php echo $numeroDeElementos; ?>">
-              <input type="text" name="suma" value="<?php echo $suma; ?>">
-              <input type="submit" value="Aceptar">
-            </form>
-          <?php
-          }
-        
-          if ($suma >= 10000) {
-            echo "Ha introducido un total de $numeroDeElementos números.<br>";
-            echo "La suma total es $suma<br>";
-            echo "La media es ".($suma/$numeroDeElementos);
-          }
-          ?>
+        <?php
+        $count = 0;
+        $res = 0;
+        do {
+            $num = rand(-5,25);
+            $count++;
+            $res = $res + $num;
+        } while ($res <= 1000);
+        $avg=$res/$count;
+        echo "<p>Total: $res</p>";
+        echo "<p>Números generados: $count</p>";
+        echo "<p>Media: $avg</p>";
+        ?>
+    </body>
+</html>
