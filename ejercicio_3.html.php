@@ -15,7 +15,7 @@
     </head>
     <body>
         <h3>Ejercicio 3</h3>
-        <p>Muestra los números múltiplos de 5 de 0 a 100 utilizando un bucle do-while.</p>
+        <p>Muestra los números múltiplos de 5 de 0 a 100 utilizando un bucle do-while</p>
         <?php
             $i=0;
             do {
